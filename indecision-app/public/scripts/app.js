@@ -1,58 +1,67 @@
-"use strict";
+'use strict';
 
-console.log("Does this change?!");
-
-// JSX  - Javascript XML
+var app = {
+    title: 'Indecision App',
+    subtitle: 'Put your life in the hands of'
+};
 
 var template = React.createElement(
-    "div",
+    'div',
     null,
     React.createElement(
-        "h1",
+        'h1',
         null,
-        "This is JAX from app.js"
+        app.title
     ),
     React.createElement(
-        "p",
+        'p',
         null,
-        "This is some info"
+        app.subtitle
     ),
     React.createElement(
-        "ol",
+        'ol',
         null,
         React.createElement(
-            "li",
+            'li',
             null,
-            "Item One"
+            'Item One'
         ),
         React.createElement(
-            "li",
+            'li',
             null,
-            "Item Two"
+            'Item Two'
         )
     )
 );
 
+var user = {
+    name: 'Alejandro Bermúdez Vargas',
+    age: 22,
+    location: 'Alajuela, Costa Rica'
+};
+
 var templateTwo = React.createElement(
-    "div",
+    'div',
     null,
     React.createElement(
-        "h1",
+        'h1',
         null,
-        "Alejandro Berm\xFAdez Vargas"
+        user.name.toUpperCase()
     ),
     React.createElement(
-        "p",
+        'p',
         null,
-        "Age: 22"
+        'Age: ',
+        user.age
     ),
     React.createElement(
-        "p",
+        'p',
         null,
-        "Location: Alajuela, Costa Rica"
+        'Location: ',
+        user.location
     )
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot);
+ReactDOM.render(template, appRoot);
