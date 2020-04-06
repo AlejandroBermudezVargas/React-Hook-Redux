@@ -1,12 +1,14 @@
-var app = {
+const app = {
     title: 'Indecision App',
-    subtitle: 'Put your life in the hands of'
+    subtitle: 'Put your life in the hands of a computer',
+    options: ['One', 'Two']
 }
 
-var template = (
+const template = (
     <div>
         <h1>{app.title}</h1>
         <p>{app.subtitle}</p>
+        <p>{app.options.length > 0 ? 'Here are your options:' : 'No options'}</p>
         <ol>
             <li>Item One</li>
             <li>Item Two</li>
@@ -20,16 +22,22 @@ var user = {
     location: 'Alajuela, Costa Rica'
 }
 
+function getLocation(location) {
+    if (location) {
+        return location;
+    } else {
+        return 'Unknown';
+    }
+}
 
-
-var templateTwo = (
+const templateTwo = (
     <div>
         <h1>{user.name.toUpperCase()}</h1>
         <p>Age: {user.age}</p>
-        <p>Location: {user.location}</p>
+        {user.location ? <p>Location: {user.location}</p> : undefined}
     </div>
 );
 
-var appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
 
 ReactDOM.render(template, appRoot);
