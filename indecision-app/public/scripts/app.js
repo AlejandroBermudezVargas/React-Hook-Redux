@@ -1,34 +1,112 @@
 'use strict';
 
-// arguments object - no longer  bound with arrow functions
-
-var add = function add(a, b) {
-    //console.log(arguments);
-    return a + b;
+var app = {
+    title: 'Indecision App',
+    subtitle: 'Put your life in the hands of a computer',
+    options: ['One', 'Two']
 };
 
-console.log(add(55, 1));
+var template = React.createElement(
+    'div',
+    null,
+    React.createElement(
+        'h1',
+        null,
+        app.title
+    ),
+    React.createElement(
+        'p',
+        null,
+        app.subtitle
+    ),
+    React.createElement(
+        'p',
+        null,
+        app.options.length > 0 ? 'Here are your options:' : 'No options'
+    ),
+    React.createElement(
+        'ol',
+        null,
+        React.createElement(
+            'li',
+            null,
+            'Item One'
+        ),
+        React.createElement(
+            'li',
+            null,
+            'Item Two'
+        )
+    )
+);
 
-// this keywork - not longer bound
+var count = 0;
 
-var user = {
-    name: 'Alejandro',
-    cities: ['Alajuela', 'San Jose', 'Cartago'],
-    printPlacesLived: function printPlacesLived() {
-        var _this = this;
-
-        return this.cities.map(function (city) {
-            return _this.name + ' has lived in ' + city;
-        });
-    }
+var addOne = function addOne() {
+    count++;
+    renderCounterApp();
 };
 
-var multiplier = {
-    multiplyBy: function multiplyBy(numberList, _multiplyBy) {
-        return numberList.map(function (number) {
-            return number * _multiplyBy;
-        });
-    }
+var minusOne = function minusOne() {
+    count--;
+    renderCounterApp();
 };
 
-console.log(multiplier.multiplyBy([1, 2, 3, 4, 5], 25));
+var reset = function reset() {
+    count = 0;
+    renderCounterApp();
+};
+
+var appRoot = document.getElementById('app');
+
+var renderCounterApp = function renderCounterApp() {
+    var templateTwo = React.createElement(
+        'div',
+        { className: 'container' },
+        React.createElement(
+            'div',
+            { className: 'row' },
+            React.createElement(
+                'h1',
+                null,
+                'Count: ',
+                count
+            ),
+            React.createElement(
+                'div',
+                { className: 'row' },
+                React.createElement(
+                    'div',
+                    { className: 'col m2' },
+                    React.createElement(
+                        'button',
+                        { onClick: addOne, className: 'waves-effect waves-light btn green accent-4' },
+                        '+1'
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'col m2' },
+                    React.createElement(
+                        'button',
+                        { onClick: minusOne, className: 'waves-effect waves-light btn red accent-4' },
+                        '-1'
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'col m2' },
+                    React.createElement(
+                        'button',
+                        { onClick: reset, className: 'waves-effect waves-light btn blue accent-4' },
+                        'RESET'
+                    )
+                )
+            )
+        )
+    );
+
+    ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp();

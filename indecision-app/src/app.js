@@ -16,28 +16,47 @@ const template = (
     </div>
 );
 
-var user = {
-    name: 'Alejandro Bermúdez Vargas',
-    age: 22,
-    location: 'Alajuela, Costa Rica'
+
+let count = 0;
+
+const addOne = () => {
+    count ++;
+    renderCounterApp();
 }
 
-function getLocation(location) {
-    if (location) {
-        return location;
-    } else {
-        return 'Unknown';
-    }
+const minusOne = () => {
+    count --;
+    renderCounterApp();
 }
 
-const templateTwo = (
-    <div>
-        <h1>{user.name.toUpperCase()}</h1>
-        <p>Age: {user.age}</p>
-        {user.location ? <p>Location: {user.location}</p> : undefined}
-    </div>
-);
+const reset = () => {
+    count = 0;
+    renderCounterApp();
+}
 
 const appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+const renderCounterApp = () => {
+    const templateTwo = (
+        <div className="container">
+            <div className="row">
+                <h1>Count: {count}</h1>
+                <div className="row">
+                    <div className="col m2">
+                        <button onClick={addOne} className="waves-effect waves-light btn green accent-4">+1</button>
+                    </div>
+                    <div className="col m2">
+                        <button onClick={minusOne} className="waves-effect waves-light btn red accent-4">-1</button>
+                    </div>
+                    <div className="col m2">
+                        <button onClick={reset} className="waves-effect waves-light btn blue accent-4">RESET</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
+    ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp();
