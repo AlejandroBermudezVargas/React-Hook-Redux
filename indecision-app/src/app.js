@@ -7,7 +7,7 @@ class IndecisionApp extends React.Component {
         this.handleAddOption = this.handleAddOption.bind(this);
 
         this.state = {
-            options: []
+            options: props.options
         }
     }
 
@@ -41,12 +41,11 @@ class IndecisionApp extends React.Component {
     }
 
     render() {
-        const title = 'Indecision App';
         const SubTitle = 'Put your life in the hands of a computer';
 
         return (
             <div className="container">
-                <Header title={title} subtitle={SubTitle} />
+                <Header   />
                 <Action hasOptions={this.state.options.length > 0}
                     handleOnMakeDecision={this.handleOnMakeDecision}
                 />
@@ -61,14 +60,22 @@ class IndecisionApp extends React.Component {
     }
 }
 
+IndecisionApp.defaultProps = {
+    options: []
+}
+
 //Stateless Functional Component
-const Header  = (props) => {
+const Header = (props) => {
     return (
         <div>
             <h1>{props.title}</h1>
-            <h5>{props.subtitle}</h5>
+            {props.subtitle && <h5>{props.subtitle}</h5>}
         </div>
     );
+}
+
+Header.defaultProps = {
+    title: 'Indecision App'
 }
 
 //Stateless Functional Component
@@ -138,4 +145,4 @@ class AddOption extends React.Component {
     }
 }
 
-ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
+ReactDOM.render(<IndecisionApp options={['Devils Den', 'Second District']}/>, document.getElementById('app'));

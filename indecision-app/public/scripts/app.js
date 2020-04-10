@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8,201 +8,152 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var IndecisionApp = function (_React$Component) {
-    _inherits(IndecisionApp, _React$Component);
+var Counter = function (_React$Component) {
+    _inherits(Counter, _React$Component);
 
-    function IndecisionApp(props) {
-        _classCallCheck(this, IndecisionApp);
+    function Counter(props) {
+        _classCallCheck(this, Counter);
 
-        var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
 
-        _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
-        _this.handleOnMakeDecision = _this.handleOnMakeDecision.bind(_this);
-        _this.handleAddOption = _this.handleAddOption.bind(_this);
+        _this.handleAddOne = _this.handleAddOne.bind(_this);
+        _this.handleMinusOne = _this.handleMinusOne.bind(_this);
+        _this.handleReset = _this.handleReset.bind(_this);
 
         _this.state = {
-            options: []
+            count: _this.props.count
         };
         return _this;
     }
 
-    _createClass(IndecisionApp, [{
-        key: 'handleDeleteOptions',
-        value: function handleDeleteOptions() {
-            this.setState(function () {
-                return {
-                    options: []
-                };
-            });
-        }
-    }, {
-        key: 'handleOnMakeDecision',
-        value: function handleOnMakeDecision() {
-            var randomNum = Math.floor(Math.random() * this.state.options.length);
-            var option = this.state.options[randomNum];
-            alert(option);
-        }
-    }, {
-        key: 'handleAddOption',
-        value: function handleAddOption(option) {
-            if (!option) {
-                return 'Enter valid value to add item';
-            } else if (this.state.options.indexOf(option) > -1) {
-                return 'This option already exist';
-            }
-
+    _createClass(Counter, [{
+        key: "handleAddOne",
+        value: function handleAddOne() {
             this.setState(function (prevState) {
                 return {
-                    options: prevState.options.concat([option])
+                    count: prevState.count + 1
                 };
             });
         }
     }, {
-        key: 'render',
-        value: function render() {
-            var title = 'Indecision App';
-            var SubTitle = 'Put your life in the hands of a computer';
-
-            return React.createElement(
-                'div',
-                { className: 'container' },
-                React.createElement(Header, { title: title, subtitle: SubTitle }),
-                React.createElement(Action, { hasOptions: this.state.options.length > 0,
-                    handleOnMakeDecision: this.handleOnMakeDecision
-                }),
-                React.createElement(Options, { options: this.state.options,
-                    handleDeleteOptions: this.handleDeleteOptions
-                }),
-                React.createElement(AddOption, {
-                    handleAddOption: this.handleAddOption
-                })
-            );
-        }
-    }]);
-
-    return IndecisionApp;
-}(React.Component);
-
-//Stateless Functional Component
-
-
-var Header = function Header(props) {
-    return React.createElement(
-        'div',
-        null,
-        React.createElement(
-            'h1',
-            null,
-            props.title
-        ),
-        React.createElement(
-            'h5',
-            null,
-            props.subtitle
-        )
-    );
-};
-
-//Stateless Functional Component
-var Action = function Action(props) {
-    return React.createElement(
-        'div',
-        null,
-        React.createElement(
-            'button',
-            { onClick: props.handleOnMakeDecision, disabled: !props.hasOptions, type: 'button', className: 'waves-effect waves-light btn' },
-            'What should I do?'
-        )
-    );
-};
-
-//Stateless Functional Component
-var Options = function Options(props) {
-    return React.createElement(
-        'div',
-        null,
-        React.createElement(
-            'div',
-            null,
-            React.createElement(
-                'button',
-                { onClick: props.handleDeleteOptions, type: 'button', className: 'waves-effect waves-light btn red accent-4' },
-                'Remove All'
-            )
-        ),
-        React.createElement(
-            'div',
-            null,
-            props.options.map(function (option) {
-                return React.createElement(Option, { key: option, optionText: option });
-            })
-        )
-    );
-};
-
-//Stateless Functional Component
-var Option = function Option(props) {
-    return React.createElement(
-        'div',
-        null,
-        'Option: ',
-        props.optionText
-    );
-};
-
-var AddOption = function (_React$Component2) {
-    _inherits(AddOption, _React$Component2);
-
-    function AddOption(props) {
-        _classCallCheck(this, AddOption);
-
-        var _this2 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
-
-        _this2.handleAddOption = _this2.handleAddOption.bind(_this2);
-
-        _this2.state = {
-            error: undefined
-        };
-        return _this2;
-    }
-
-    _createClass(AddOption, [{
-        key: 'handleAddOption',
-        value: function handleAddOption(e) {
-            e.preventDefault();
-            var option = e.target.elements.option.value.trim();
-            var error = this.props.handleAddOption(option);
-
-            this.setState(function () {
-                return { error: error };
+        key: "handleMinusOne",
+        value: function handleMinusOne() {
+            this.setState(function (prevState) {
+                return {
+                    count: prevState.count - 1
+                };
             });
         }
     }, {
-        key: 'render',
+        key: "handleReset",
+        value: function handleReset() {
+            this.setState(function () {
+                return {
+                    count: 0
+                };
+            });
+        }
+    }, {
+        key: "render",
         value: function render() {
             return React.createElement(
-                'div',
-                null,
-                this.state.error && React.createElement(
-                    'p',
-                    null,
-                    this.state.error
-                ),
+                "div",
+                { className: "container" },
                 React.createElement(
-                    'form',
-                    { onSubmit: this.handleAddOption },
-                    React.createElement('input', { type: 'text', name: 'option' }),
+                    "div",
+                    { className: "row" },
                     React.createElement(
-                        'button',
-                        { className: 'waves-effect waves-light btn green accent-4' },
-                        'Add Option'
+                        "h1",
+                        null,
+                        "Count: ",
+                        this.state.count
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "row" },
+                        React.createElement(
+                            "div",
+                            { className: "col m2" },
+                            React.createElement(
+                                "button",
+                                { onClick: this.handleAddOne, className: "waves-effect waves-light btn green accent-4" },
+                                "+1"
+                            )
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "col m2" },
+                            React.createElement(
+                                "button",
+                                { onClick: this.handleMinusOne, className: "waves-effect waves-light btn red accent-4" },
+                                "-1"
+                            )
+                        ),
+                        React.createElement(
+                            "div",
+                            { className: "col m2" },
+                            React.createElement(
+                                "button",
+                                { onClick: this.handleReset, className: "waves-effect waves-light btn blue accent-4" },
+                                "RESET"
+                            )
+                        )
                     )
                 )
             );
         }
     }]);
 
-    return AddOption;
+    return Counter;
 }(React.Component);
 
-ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));
+Counter.defaultProps = {
+    count: 0
+};
+
+ReactDOM.render(React.createElement(Counter, { count: 5 }), document.getElementById('app'));
+
+// const appRoot = document.getElementById('app');
+
+
+// let count = 0;
+
+// const addOne = () => {
+//     count ++;
+//     renderCounterApp();
+// }
+
+// const minusOne = () => {
+//     count --;
+//     renderCounterApp();
+// }
+
+// const reset = () => {
+//     count = 0;
+//     renderCounterApp();
+// }
+
+// const renderCounterApp = () => {
+//     const templateTwo = (
+//         <div className="container">
+//             <div className="row">
+//                 <h1>Count: {count}</h1>
+//                 <div className="row">
+//                     <div className="col m2">
+//                         <button onClick={addOne} className="waves-effect waves-light btn green accent-4">+1</button>
+//                     </div>
+//                     <div className="col m2">
+//                         <button onClick={minusOne} className="waves-effect waves-light btn red accent-4">-1</button>
+//                     </div>
+//                     <div className="col m2">
+//                         <button onClick={reset} className="waves-effect waves-light btn blue accent-4">RESET</button>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+
+//     ReactDOM.render(templateTwo, appRoot);
+// };
+
+// renderCounterApp();
