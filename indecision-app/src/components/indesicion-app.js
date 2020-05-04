@@ -1,48 +1,40 @@
 var React = require('react');
-import AddOption from  './add-option.js'
-import Header from  './header.js'
-import Action from  './action.js'
+import AddOption from './add-option.js'
+import Header from './header.js'
+import Action from './action.js'
 import Options from './options.js'
 
 class IndecisionApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-        this.handleOnMakeDecision = this.handleOnMakeDecision.bind(this);
-        this.handleAddOption = this.handleAddOption.bind(this);
-        this.handleDeleteOption = this.handleDeleteOption.bind(this);
-
-        this.state = {
-            options: props.options
-        }
+    state = {
+        options: []
     }
 
-    handleDeleteOptions() {
+    handleDeleteOptions = () => {
         this.setState(() => ({ options: [] }))
     }
 
-    handleOnMakeDecision() {
+    handleOnMakeDecision = () => {
         const randomNum = Math.floor(Math.random() * this.state.options.length);
         const option = this.state.options[randomNum];
     }
 
-    handleDeleteOption(optionToRemove) {
-        this.setState((previousState) => ({ options: previousState.options.filter((option) => option != optionToRemove)}))
+    handleDeleteOption = (optionToRemove) => {
+        this.setState((previousState) => ({ options: previousState.options.filter((option) => option != optionToRemove) }))
     }
 
-    componentDidMount(){
+    componentDidMount = () => {
         console.log('Fetching Data');
     }
 
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate = (prevProps, prevState) => {
         console.log('Saving data');
     }
 
-    componentWillUnmount() {
+    componentWillUnmount = () => {
         console.log('componentWillUnmount');
     }
 
-    handleAddOption(option) {
+    handleAddOption = (option) => {
         if (!option) {
             return 'Enter valid value to add item';
         } else if (this.state.options.indexOf(option) > -1) {
